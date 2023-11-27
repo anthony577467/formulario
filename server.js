@@ -63,6 +63,7 @@ app.get("/form-estudiante", (req, res) => {
  */
 app.post("/procesar-formulario", async (req, res) => {
   console.log(req.body);
+
   // Verificar campos vacíos
   for (const campo in req.body) {
     if (!req.body[campo]) {
@@ -71,31 +72,46 @@ app.post("/procesar-formulario", async (req, res) => {
     }
   }
 
-  /**
-   * Desestructuración de los datos del body
-   */
-  const { nombre_alumno, email_alumno, curso_alumno } = req.body;
+  const {
+    nombre_apellido,
+    correo,
+    curso,
+    dni,
+    celular,
+    direccion
+  } = req.body;
+
   try {
-    // Realizar la inserción en la base de datos
+    // Formato de fecha actual
+    const fecha_registro = new Date().toISOString().slice(0, 19).replace("T", " ");
+
+    // Realizar la inserción en la base de datos usando connection.execute
     const query =
-      "INSERT INTO estudiantes (nombre_alumno, email_alumno, curso_alumno, created_at) VALUES (?, ?, ?, ?)";
-    await connection.execute(query, [
-      nombre_alumno,
-      email_alumno,
-      curso_alumno,
-      new Date(),
-    ]);
+  "INSERT INTO estudiantes (NOMBRE_APELLIDO, CORREO, CURSO, FECHA_REGISTRO, DNI, CELULAR, DIRECCION) VALUES (?, ?, ?, NOW(), ?, ?, ?)";
+
+
+    // Asegúrate de que todos los valores están definidos
+    const values = [
+      nombre_apellido,
+      correo,
+      curso,
+      fecha_registro,
+      dni,
+      celular,
+      direccion
+    ];
+
+    await connection.execute(query, values);
 
     res.render("inicio", {
-      rutaActual: "/",
+      rutaActual: "/"
     });
-    //res.send(`¡Formulario procesado correctamente!`);
   } catch (error) {
     console.error("Error al insertar en la base de datos: ", error);
-    console.log(error); // Agregar esta línea para imprimir el error completo en la consola
     res.send("Error al procesar el formulario");
   }
 });
+
 
 /**
  * Insert segunda forma
@@ -130,7 +146,7 @@ app.post("/procesar-formulario2", (req, res) => {
 });
 
 // Iniciar el servidor con Express
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });

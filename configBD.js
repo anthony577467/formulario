@@ -1,12 +1,14 @@
 const mysql = require("mysql2");
 
 const connection = mysql.createConnection({
-  host: "localhost", // MYSQL HOST NAME
-  user: "eocares", // MYSQL USERNAME
-  password: "ocares144", // MYSQL PASSWORD
-  database: "nodejs", // MYSQL DB NAME
-  port: 3306,
+  host: "localhost",
+  user: "root",
+  password: "admin",
+  database: "estudiante",
+  port: 3301,
+  connectTimeout: 60000, // Aumentar el tiempo de espera a 60 segundos (o más si es necesario)
 });
+
 
 connection.connect((err) => {
   if (!err) console.log("Database connected successfully");

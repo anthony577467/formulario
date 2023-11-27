@@ -2,7 +2,7 @@
 <html lang="es">
   <head>
     <%- include('../includes/head') %>
-    <link rel="stylesheet" href="public/css/home.css" />
+    <link rel="stylesheet" href="/public/css/home.css" />
   </head>
   <body>
     <%- include('../includes/header') %>
@@ -20,21 +20,33 @@
           <div class="col-md-6 mt-5 text-center cardForm">
             <form action="/procesar-formulario" method="POST">
               <div class="form-group mb-3">
-                <label for="nombre_alumno">Nombre del Estudiante</label>
-                <input type="text" name="nombre_alumno" class="form-control" />
+                <label for="nombre_apellido">Nombre y Apellido del Estudiante</label>
+                <input type="text" name="nombre_apellido" class="form-control" />
               </div>
               <div class="form-group mb-3">
-                <label for="email_alumno">Correo del Estudiante</label>
-                <input type="text" name="email_alumno" class="form-control" />
+                <label for="correo">Correo del Estudiante</label>
+                <input type="text" name="correo" class="form-control" />
               </div>
               <div class="form-group mb-4">
-                <label for="curso_alumno">Curso</label>
-                <select name="curso_alumno" class="form-control">
+                <label for="curso">Curso</label>
+                <select name="curso" class="form-control">
                   <option value="Python">Python</option>
                   <option value="NodeJS">NodeJS</option>
                   <option value="PHP">PHP</option>
                   <option value="JavaScript">JavaScript</option>
                 </select>
+              </div>
+              <div class="form-group mb-3">
+                <label for="dni">DNI</label>
+                <input type="text" name="dni" class="form-control" />
+              </div>
+              <div class="form-group mb-3">
+                <label for="celular">Número de Celular</label>
+                <input type="text" name="celular" class="form-control" />
+              </div>
+              <div class="form-group mb-3">
+                <label for="direccion">Dirección</label>
+                <input type="text" name="direccion" class="form-control" />
               </div>
 
               <button type="submit" class="btn btn-info btn-lg btn-block">
